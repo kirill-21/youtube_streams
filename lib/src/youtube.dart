@@ -51,7 +51,7 @@ Future<Map<String, dynamic>> _parseVideoData(String url) async {
   client.badCertificateCallback = badSSLCallback;
 
   final rt = await client.postUrl(
-    Uri.parse('https://www.youtube.com/youtubei/v1/player'),
+    Uri.parse('https://www.youtube.com/youtubei/v1/player?prettyPrint=false'),
   );
 
   // Add appropriate headers to simulate beta android client
@@ -71,12 +71,14 @@ Future<Map<String, dynamic>> _parseVideoData(String url) async {
     {
       "context": {
         "client": {
-          "clientName": "ANDROID_CREATOR",
-             "clientVersion": "24.24.100",
-             "androidSdkVersion": 30,
-             "hl": "en",
-             "gl": "US",
-             "utcOffsetMinutes": 0
+          'clientName': 'ANDROID',
+          'clientVersion': '19.09.37',
+          'androidSdkVersion': 30,
+          'userAgent':
+          'com.google.android.youtube/19.09.37 (Linux; U; Android 11) gzip',
+          'hl': 'en',
+          'timeZone': 'UTC',
+          'utcOffsetMinutes': 0,
         }
 	    },
       "videoId": "${RegExp(_youtubeRegexPattern).allMatches(url).map((x) => x.group(1)).toList().first}",
